@@ -15,7 +15,7 @@ jobs:
               with:
                   ref: main
             - name: Log in to GitHub Packages
-              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin gchr.io
+              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Pull images
@@ -50,7 +50,7 @@ jobs:
               with:
                   ref: main
             - name: Log in to GitHub Packages
-              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin gchr.io
+              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Pull images
@@ -105,7 +105,7 @@ jobs:
               with:
                   ref: main
             - name: Log in to GitHub Packages
-              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin gchr.io
+              run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Pull images
