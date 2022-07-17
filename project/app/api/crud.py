@@ -1,6 +1,7 @@
 from typing import Optional
 
 from fastapi import HTTPException
+
 from app.models.pydantic import BudgetPayloadSchema
 from app.models.tortoise import Budget
 

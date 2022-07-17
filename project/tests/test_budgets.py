@@ -1,7 +1,5 @@
 import json
 
-import pytest
-
 
 def test_create_budget(test_app_with_db):
     response = test_app_with_db.post(

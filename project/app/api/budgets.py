@@ -4,7 +4,6 @@ from app.api import crud
 from app.models.pydantic import BudgetPayloadSchema, BudgetResponseSchema
 from app.models.tortoise import BudgetSchema
 
-
 router = APIRouter()
 
 
