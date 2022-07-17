@@ -11,8 +11,7 @@ log = logging.getLogger("uvicorn")
 def create_application() -> FastAPI:
     application = FastAPI()
     application.include_router(ping.router)
-    application.include_router(
-        budgets.router, prefix="/budgets", tags=["budgets"])
+    application.include_router(budgets.router, prefix="/budgets", tags=["budgets"])
 
     return application
 

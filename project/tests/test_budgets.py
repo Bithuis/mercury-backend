@@ -4,11 +4,16 @@ import pytest
 
 
 def test_create_budget(test_app_with_db):
-    response = test_app_with_db.post("/budgets/", data=json.dumps({
-        "month": 1,
-        "year": 2020,
-        "user_id": 1,
-    }))
+    response = test_app_with_db.post(
+        "/budgets/",
+        data=json.dumps(
+            {
+                "month": 1,
+                "year": 2020,
+                "user_id": 1,
+            }
+        ),
+    )
 
     assert response.status_code == 201
     assert response.json()["month"] == 1
@@ -17,28 +22,38 @@ def test_create_budget(test_app_with_db):
 
 
 def test_create_budgets_invalid_json(test_app):
-    response = test_app.post("/budgets/", data=json.dumps({
-        "month": 1,
-        "year": 2020,
-    }))
+    response = test_app.post(
+        "/budgets/",
+        data=json.dumps(
+            {
+                "month": 1,
+                "year": 2020,
+            }
+        ),
+    )
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {
                 "loc": ["body", "user_id"],
                 "msg": "field required",
-                "type": "value_error.missing"
+                "type": "value_error.missing",
             }
         ]
     }
 
 
 def test_read_budget(test_app_with_db):
-    response = test_app_with_db.post("/budgets/", data=json.dumps({
-        "month": 1,
-        "year": 2020,
-        "user_id": 1,
-    }))
+    response = test_app_with_db.post(
+        "/budgets/",
+        data=json.dumps(
+            {
+                "month": 1,
+                "year": 2020,
+                "user_id": 1,
+            }
+        ),
+    )
     budget_id = response.json()["id"]
 
     response = test_app_with_db.get(f"/budgets/{budget_id}")
