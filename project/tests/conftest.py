@@ -6,6 +6,7 @@ from tortoise.contrib.fastapi import register_tortoise
 
 from app.config import Settings, get_settings
 from app.main import create_application
+from app.utils.auth_utils import create_access_token
 
 
 def get_settings_override():
@@ -33,6 +34,5 @@ def test_app_with_db():
         add_exception_handlers=True,
     )
     with TestClient(app) as test_client:
-
-        # testing
+        test_client.auth_token = create_access_token(data={"sub": "test_user"})
         yield test_client
