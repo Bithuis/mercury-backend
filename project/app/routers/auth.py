@@ -2,11 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.models.pydantic import RegisterPayloadSchema, RegisterResponseSchema
-from app.utils.auth_utils import (
-    authenticate_user,
-    create_access_token,
-    get_password_hash,
-)
+from app.utils.auth_utils import (authenticate_user, create_access_token,
+                                  get_password_hash)
 from app.utils.crud.auth_crud import post
 
 router = APIRouter()

@@ -11,6 +11,10 @@ def test_create_budget(test_app_with_db):
                 "user_id": 1,
             }
         ),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {test_app_with_db.auth_token}",
+        },
     )
 
     assert response.status_code == 201
@@ -19,8 +23,8 @@ def test_create_budget(test_app_with_db):
     assert response.json()["user_id"] == 1
 
 
-def test_create_budgets_invalid_json(test_app):
-    response = test_app.post(
+def test_create_budgets_invalid_json(test_app_with_db):
+    response = test_app_with_db.post(
         "/budgets/",
         data=json.dumps(
             {
@@ -28,6 +32,10 @@ def test_create_budgets_invalid_json(test_app):
                 "year": 2020,
             }
         ),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {test_app_with_db.auth_token}",
+        },
     )
     assert response.status_code == 422
     assert response.json() == {
@@ -51,10 +59,20 @@ def test_read_budget(test_app_with_db):
                 "user_id": 1,
             }
         ),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {test_app_with_db.auth_token}",
+        },
     )
     budget_id = response.json()["id"]
 
-    response = test_app_with_db.get(f"/budgets/{budget_id}")
+    response = test_app_with_db.get(
+        f"/budgets/{budget_id}",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {test_app_with_db.auth_token}",
+        },
+    )
     assert response.status_code == 200
 
     response_dict = response.json()
@@ -65,6 +83,12 @@ def test_read_budget(test_app_with_db):
 
 
 def test_read_budget_incorrect_id(test_app_with_db):
-    response = test_app_with_db.get("/budgets/999/")
+    response = test_app_with_db.get(
+        "/budgets/999/",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {test_app_with_db.auth_token}",
+        },
+    )
     assert response.status_code == 404
     assert response.json()["detail"] == "budget not found"
